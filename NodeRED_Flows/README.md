@@ -19,11 +19,6 @@ The file `SmartAlex/flows.json` contains the complete set of flows currently in 
 - Time and inject nodes for testing chatbot flow-building features
 - Simple importable samples for guided walkthroughs
 
-## 🚫 Not Yet Included
-The following flow types are under development and will be added in a future version:
-- Solinst Model 301 Modbus flow for water level and temperature
-- Water usage anomaly detection logic
-- Graphical system overview dashboards
 
 ---
 

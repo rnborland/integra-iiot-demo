@@ -85,7 +85,7 @@ MIT License — for public source files. The AWS image is commercial and maintai
 We specialize in scalable IIoT solutions for water treatment, environmental monitoring, industrial automation, and energy usage analytics.
 
 🌐 Website: [https://integra-developments.com](https://integra-developments.com)
-📩 Contact: smartalex@integra-developments.com
+📩 Contact: info@integra-developments.com
 
 
 
