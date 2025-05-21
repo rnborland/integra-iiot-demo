@@ -24,6 +24,7 @@ app.options('/', (req, res) => {
 });
 
 app.post('/', async (req, res) => {
+<<<<<<< HEAD
     const { messages } = req.body;
 
     if (!Array.isArray(messages) || messages.length === 0) {
@@ -36,6 +37,14 @@ app.post('/', async (req, res) => {
         ...messages
     ];
 
+=======
+    const { message } = req.body;
+
+    if (!message) {
+        return res.status(400).json({ reply: "No message provided." });
+    }
+
+>>>>>>> 4615f048130fe2100f469f643ae943797234ab35
     try {
         const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -45,7 +54,20 @@ app.post('/', async (req, res) => {
             },
             body: JSON.stringify({
                 model: "gpt-4o",
+<<<<<<< HEAD
                 messages: fullConversation
+=======
+                messages: [
+                    {
+                        role: "system",
+                        content: systemPrompt
+                    },
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ]
+>>>>>>> 4615f048130fe2100f469f643ae943797234ab35
             })
         });
 
@@ -62,7 +84,6 @@ app.post('/', async (req, res) => {
         return res.status(500).json({ reply: "Server error, please try again later." });
     }
 });
-
 
 app.listen(PORT, () => {
     console.log(`✅ SmartAlex chatbot backend listening at http://localhost:${PORT}`);
