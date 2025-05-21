@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meet SmartAlex – Your IIoT Assistant</title>
+</head>
+<body>
+  <h1>Meet SmartAlex – Your Built-In IIoT Assistant</h1>
+
+  <p>
+    SmartAlex is an AI-powered chatbot designed to help engineers and system integrators use the Integra IIoT platform efficiently — whether you're building Node-RED flows, writing to InfluxDB, decoding sensor payloads, or getting data into Grafana.
+  </p>
+
+  <h2>What Can SmartAlex Do?</h2>
+  <ul>
+    <li>✅ Help you build and import tested Node-RED flows</li>
+    <li>✅ Guide you in writing time-series data to InfluxDB</li>
+    <li>✅ Decode LoRaWAN, Modbus, and custom payloads</li>
+    <li>✅ Assist with troubleshooting and system setup</li>
+  </ul>
+
+  <h2>Early Access</h2>
+  <p>
+    SmartAlex is available for early adopters free of charge. Future versions may include advanced features under a paid plan. If you're seeing this page from the AWS Marketplace or an invite, you’re in!
+  </p>
+
+  <h2>Register to Use SmartAlex</h2>
+  <p>To get early access to SmartAlex, please register below. You'll receive confirmation by email if accepted.</p>
+
+  <!-- WPForms shortcode placeholder -->
+  <div id="form-wrapper">
+    [wpforms id="1754"]
+  </div>
+
+  <!-- Chatbot area hidden by default -->
+  <div id="chatbot-section" style="display:none; margin-top: 40px;">
+    <h3>Talk to SmartAlex Now:</h3>
+    <img src="https://integra-developments.com/wp-content/uploads/2025/03/a_cartoon-style_tech_support_guy_receding_hairlin-300x300.webp" alt="SmartAlex">
+
+    <div id="chatbox" style="border:1px solid #ccc; padding:10px; width:100%; max-width:500px; height:500px; overflow-y:auto;">
+      <p><strong>SmartAlex:</strong> Hi! I’m SmartAlex, your IIoT Systems Specialist. How can I help you today?</p>
+    </div>
+
+    <input type="text" id="userInput" placeholder="Type your question here..." style="width:100%; padding:8px;" />
+    <button id="sendBtn" style="margin-top:5px;">Send</button>
+  </div>
+
+  <!-- JS Logic: show chatbot on successful WPForms submission -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const chatbot = document.getElementById("chatbot-section");
+      const formWrapper = document.getElementById("form-wrapper");
+
+      console.log("✅ DOM fully loaded");
+
+      if (localStorage.getItem("smartalex_registered") === "true") {
+        if (formWrapper) formWrapper.style.display = "none";
+        if (chatbot) chatbot.style.display = "block";
+        console.log("✅ Returning visitor: showing chatbot only");
+      } else {
+        const observer = new MutationObserver(() => {
+          const formStillVisible = document.querySelector("#form-wrapper form");
+          if (!formStillVisible) {
+            if (formWrapper) formWrapper.style.display = "none";
+            if (chatbot) chatbot.style.display = "block";
+            localStorage.setItem("smartalex_registered", "true");
+            console.log("📝 smartalex_registered set to true");
+            observer.disconnect();
+          }
+        });
+
+        observer.observe(document.getElementById("form-wrapper"), {
+          childList: true,
+          subtree: true,
+        });
+      }
+
+      // SmartAlex memory support
+      const messageHistory = [
+        { role: "system", content: "You are a helpful assistant specialized in IIoT systems." }
+      ];
+
+      const sendBtn = document.getElementById("sendBtn");
+      if (sendBtn) {
+        sendBtn.addEventListener("click", async function () {
+          const input = document.getElementById("userInput").value;
+          if (!input) return;
+
+          const chatbox = document.getElementById("chatbox");
+          chatbox.innerHTML += `<p><strong>You:</strong> ${input}</p>`;
+          messageHistory.push({ role: "user", content: input });
+
+          try {
+            console.log("📨 Sending message history to server...");
+            const response = await fetch('https://iot.integra-developments.com/chatbot/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ messages: messageHistory })
+            });
+
+            const data = await response.json();
+            console.log("✅ Response from server:", data);
+            chatbox.innerHTML += `<p><strong>SmartAlex:</strong> ${data.reply}</p>`;
+            messageHistory.push({ role: "assistant", content: data.reply });
+
+          } catch (err) {
+            console.error("❌ Fetch error:", err);
+            chatbox.innerHTML += `<p><strong>SmartAlex:</strong> Connection error. Please try again later.</p>`;
+          }
+
+          document.getElementById("userInput").value = "";
+          chatbox.scrollTop = chatbox.scrollHeight;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
