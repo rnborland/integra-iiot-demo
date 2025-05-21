@@ -26,7 +26,8 @@ This platform is optimized for industrial applications such as:
 This repo supports the preconfigured AWS EC2 image published by Integra Developments.
 
 ?? **To launch the server**:
-Visit the [Integra IIoT Platform on AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g) and deploy the image on any t2/t3.small or larger EC2 instance.
+Visit the [Integra IIoT Platform on AWS Marketplacehttps://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g
+``` and deploy the image on any t2/t3.small or larger EC2 instance.
 
 Once deployed:
 
