@@ -1,39 +1,59 @@
-# Node-RED Flow Index
+# NodeRED_Flows
 
-The file `SmartAlex/flows.json` contains the complete set of flows currently in use across multiple IIoT projects developed by Integra Developments. It serves as a full working export of the Node-RED workspace deployed in the AWS EC2 image.
+This folder contains prebuilt Node-RED flows tested on the Integra IIoT platform for AWS EC2.
 
-## ðŸ“¦ Included Flow Categories
-
-### 1. Energy Monitoring
-- Dual CT coil Modbus meter integration (Peacefair)
-- Power, energy, and cost tracking logic
-- Daily and monthly calculations using Node-RED function nodes
-- MQTT + AWS IoT integration
-
-### 2. Air Quality & Odor Detection
-- Bosch BME688 gas sensor integration
-- MQTT publishing to external brokers
-- SmartAlex interaction support (future classification logic)
-
-### 3. SmartAlex Chatbot Demo Flows
-- Time and inject nodes for testing chatbot flow-building features
-- Simple importable samples for guided walkthroughs
-
+## Included Flows
 
 ---
 
-## ðŸ›  How to Use
+### `power_monitor.json`
 
-1. Open your Node-RED editor (`https://your-instance:1880`)
-2. Go to **Menu > Import**
-3. Paste the contents of `SmartAlex/flows.json`
-4. Deploy and begin testing
+- Combines readings from two Modbus energy meters via MQTT
+- Calculates:
+  - Total current (Amps)
+  - Total power (Watts)
+  - Total energy (kWh)
+  - Daily and monthly energy usage
+  - Estimated monthly cost
+- Displays real-time and historical charts via Node-RED Dashboard
+- Optionally logs to InfluxDB for Grafana visualization
 
 ---
 
-## ðŸ§  Tip
+### `thingspeak.json`
 
-You can also use SmartAlex (built into the system) to generate or modify flows interactively. Ask him for:
-- Sample MQTT publishing flows
-- LoRaWAN payload decoding
-- Function nodes for InfluxDB formatting
+- Reads temperature and humidity data from a ThingSpeak channel
+- Intended for use with Blues cellular IoT devices
+  - The Blues device transmits environmental data to ThingSpeak via Arduino code
+- Node-RED polls ThingSpeak and displays live readings in dashboard charts
+- Demonstrates HTTP-based cloud integration without MQTT
+
+---
+
+### `sensecap.json`
+
+- Includes **two separate flows**:
+  1. **SenseCAP S2100 LoRaWAN - Temperature & Humidity**
+     - Reads from a commercial LoRaWAN-enabled temp/humidity sensor
+     - Uses base64 decoding logic inside Node-RED
+     - LoRaWAN messages are received via **AWS IoT Core for LoRaWAN**
+  2. **SenseCAP S2100 LoRaWAN - pH Sensor via 4–20 mA**
+     - Reads a 4–20 mA signal from an Endress+Hauser CM42 Liquiline M transmitter
+     - Signal is passed to the SenseCAP analog input
+     - Data is sent via LoRaWAN and decoded from base64 in Node-RED
+     - Flow demonstrates full decoding and data handling
+
+?? Note: AWS IoT Core for LoRaWAN does not include built-in payload decoders (unlike TTN), so decoding must be done at the application layer (e.g., Node-RED).
+
+---
+
+## ?? Usage Instructions
+
+1. Open Node-RED on your IIoT server
+2. Use the **Import ? Clipboard** feature
+3. Paste the full content of any `.json` file
+4. Deploy the flow to test
+
+All flows are production-ready and were validated on an AWS-hosted IIoT platform using Node-RED, InfluxDB, and Grafana.
+
+---
