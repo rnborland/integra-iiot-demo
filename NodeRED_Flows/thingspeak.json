@@ -1,0 +1,380 @@
+[
+    {
+        "id": "daa08a62a44b8286",
+        "type": "debug",
+        "z": "8b057b0147da2a46",
+        "name": "debug 41",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "08f424844b623496",
+        "type": "http request",
+        "z": "8b057b0147da2a46",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://api.thingspeak.com/channels/1493400/feeds.json?api_key=LR5YBGU0QI7Q8EE5&results=2",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 450,
+        "y": 360,
+        "wires": [
+            [
+                "6065c65a790b1a97"
+            ]
+        ]
+    },
+    {
+        "id": "f298e2adcb1cebe6",
+        "type": "inject",
+        "z": "8b057b0147da2a46",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 360,
+        "wires": [
+            [
+                "08f424844b623496"
+            ]
+        ]
+    },
+    {
+        "id": "6065c65a790b1a97",
+        "type": "json",
+        "z": "8b057b0147da2a46",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 590,
+        "y": 420,
+        "wires": [
+            [
+                "daa08a62a44b8286",
+                "7df8f3a2aa8020f2",
+                "83c2f73e81bf4b8a",
+                "57364054c4148a94"
+            ]
+        ]
+    },
+    {
+        "id": "7df8f3a2aa8020f2",
+        "type": "function",
+        "z": "8b057b0147da2a46",
+        "name": "function 26",
+        "func": "msg.payload = msg.payload.feeds[0].field1\nvar num = parseFloat(msg.payload);\nmsg.payload = num;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 300,
+        "wires": [
+            [
+                "cff56537ad745998",
+                "48c52bf54e46127b",
+                "b4c1dc8fdc363405"
+            ]
+        ]
+    },
+    {
+        "id": "cff56537ad745998",
+        "type": "debug",
+        "z": "8b057b0147da2a46",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "83c2f73e81bf4b8a",
+        "type": "function",
+        "z": "8b057b0147da2a46",
+        "name": "function 27",
+        "func": "msg.payload = msg.payload.feeds[0].field2\nvar num = parseFloat(msg.payload);\nmsg.payload = num;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 220,
+        "wires": [
+            [
+                "5bb153cb52956c54",
+                "f85c71becc76fbe1"
+            ]
+        ]
+    },
+    {
+        "id": "5bb153cb52956c54",
+        "type": "debug",
+        "z": "8b057b0147da2a46",
+        "name": "debug 45",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "57364054c4148a94",
+        "type": "function",
+        "z": "8b057b0147da2a46",
+        "name": "function 28",
+        "func": "msg.payload = msg.payload.feeds[0].field3\nvar num = parseFloat(msg.payload);\nmsg.payload = num;\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "aca6e835a4539d0d",
+                "94c5a8e6eae83d2e"
+            ]
+        ]
+    },
+    {
+        "id": "aca6e835a4539d0d",
+        "type": "debug",
+        "z": "8b057b0147da2a46",
+        "name": "debug 46",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "94c5a8e6eae83d2e",
+        "type": "ui_chart",
+        "z": "8b057b0147da2a46",
+        "name": "",
+        "group": "a9c91b6e04749bdd",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Altitude",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "36",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 880,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f85c71becc76fbe1",
+        "type": "ui_chart",
+        "z": "8b057b0147da2a46",
+        "name": "",
+        "group": "a9c91b6e04749bdd",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "36",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 840,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48c52bf54e46127b",
+        "type": "ui_chart",
+        "z": "8b057b0147da2a46",
+        "name": "",
+        "group": "a9c91b6e04749bdd",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "label": "Temp",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "36",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 830,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4c1dc8fdc363405",
+        "type": "influxdb out",
+        "z": "8b057b0147da2a46",
+        "influxdb": "472e17de7ee4e7eb",
+        "name": "Outside_Temperature",
+        "measurement": "Outside_temperature",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1140,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a9c91b6e04749bdd",
+        "type": "ui_group",
+        "name": "Thingspeak",
+        "tab": "9b2d0bab.ce1568",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "472e17de7ee4e7eb",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "sensors",
+        "name": "sensor readings",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "9b2d0bab.ce1568",
+        "type": "ui_tab",
+        "name": "Dashboard",
+        "icon": "dashboard"
+    }
+]
