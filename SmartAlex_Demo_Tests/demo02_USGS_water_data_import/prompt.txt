@@ -1,0 +1,1 @@
+I need to obtain level and flow data once per hour from the usgs for kinzua creek near guffey pa station id  03011800 and send the values to influxdb under a tag for the station id  lets graph the results in grafana from the measurements in a single graph of level and flow

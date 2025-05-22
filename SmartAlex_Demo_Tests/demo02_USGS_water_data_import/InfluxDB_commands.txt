@@ -1,0 +1,13 @@
+InfluxDB shell version: 1.6.7~rc0
+> USE usgs;
+Using database usgs
+> SHOW MEASUREMENTS;
+name: measurements
+name
+----
+usgs_data
+> SELECT * FROM usgs_data ORDER BY time DESC LIMIT 5;
+name: usgs_data
+time                discharge gage_height station_id
+----                --------- ----------- ----------
+1747938117036839506 366       4.08        03011800
