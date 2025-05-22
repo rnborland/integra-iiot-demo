@@ -1,81 +1,100 @@
-# Integra IIoT Platform � AWS EC2 Deployment
+# ⚙️ Integra IIoT Platform – AWS EC2 Deployment
 
-[![View on AWS Marketplace](https://img.shields.io/badge/AWS%20Marketplace-Launch-blue?logo=amazon-aws)](https://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g)
+> [🛒 View on AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g)
 
-This repository supports the official Integra Developments **Industrial IoT (IIoT) server image** available on the AWS Marketplace. It includes full-stack components for real-time sensor integration, data visualization, and AI-assisted support via SmartAlex.
-
-## ?? What's Included
-
-* ?? **Node-RED** � Low-code editor for device and flow logic  
-* ?? **InfluxDB** � Time-series database for storing sensor data  
-* ?? **Grafana** � Visualization and alerting dashboards  
-* ?? **SmartAlex Chatbot** � Built-in AI assistant for configuration and troubleshooting
-
-This platform is optimized for industrial applications such as:
-
-* Water quality and level monitoring  
-* Environmental sensing  
-* Power usage and cost tracking  
-* Agriculture, aquaculture, and hydroponics  
-* Industrial automation (Modbus, LoRaWAN, MQTT, HTTP integrations)
+This repository supports the official **Integra Developments Industrial IoT (IIoT) server image** available on the AWS Marketplace. It includes full-stack components for real-time sensor integration, data visualization, and AI-assisted support via SmartAlex.
 
 ---
 
-## ?? AWS Deployment
+## 🚀 What's Included
 
-This repo supports the preconfigured AWS EC2 image published by Integra Developments.
-
-?? **To launch the server**:  
-Visit the Integra IIoT Platform on AWS Marketplace by copying and pasting this URL into your browser:  
-
-https://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g
-
-Then deploy the image on any t2/t3.small or larger EC2 instance.
-
-Once deployed:
-
-* Access **Node-RED** at `https://your-instance:1880`  
-* Access **Grafana** at `https://your-instance:3000`  
-* Access **SmartAlex** via embedded HTML or `/chatbot/` endpoint  
+- ✅ **Node-RED** – Low-code editor for device and flow logic  
+- ✅ **InfluxDB** – Time-series database for sensor data  
+- ✅ **Grafana** – Visualization and alerting dashboards  
+- ✅ **SmartAlex Chatbot** – AI assistant for configuration and troubleshooting
 
 ---
 
-## ?? SmartAlex Overview
+## 🌐 Use Cases
 
-SmartAlex is a built-in AI chatbot trained to assist engineers, technicians, and integrators. He can:
+This platform is optimized for:
 
-* Help build and import Node-RED flows  
-* Decode LoRaWAN, Modbus, and custom payloads  
-* Guide InfluxDB and Grafana configuration  
-* Answer technical questions in real time
-
-SmartAlex is accessible via:
-
-* The `/chatbot/` API endpoint  
-* A built-in HTML client on the image  
-* Web embedding using secure reverse proxy  
+- Water quality and level monitoring  
+- Environmental sensing  
+- Power usage and cost tracking  
+- Agriculture, aquaculture, hydroponics  
+- Industrial automation (Modbus, LoRaWAN, MQTT, HTTP)
 
 ---
 
-## ?? Technology Stack
+## ☁️ AWS Deployment
 
-* Node.js + Express (SmartAlex)  
-* Node-RED (low-code runtime)  
-* InfluxDB 2.x  
-* Grafana 10+  
-* AWS EC2 (Ubuntu 22.04)  
-* OpenAI GPT API integration  
+This repo supports the preconfigured **AWS EC2 image** published by Integra Developments.
+
+### ▶️ To Launch the Server:
+
+1. Go to:  
+   🔗 https://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g  
+2. Deploy on any `t2.small` or `t3.small` instance or larger.
+
+### 🔐 After Deployment:
+
+- Node-RED: `https://your-instance:1880`  
+- Grafana: `https://your-instance:3000`  
+- SmartAlex Chatbot: via embedded HTML or `/chatbot/` API
 
 ---
 
-## ?? Repository Structure
+## 🧠 SmartAlex Overview
 
-```text
-??? SmartAlex/              # Chatbot server backend (Node.js + Express)
-?   ??? server.js
-?   ??? system.txt
-??? NodeRED_Flows/          # Sample flows: Power Monitor, SenseCAP LoRaWAN, and Blues Cellular via ThingSpeak
-??? AWS_IoT_Examples/       # Payload decoders, MQTT/AWS IoT Core integration (coming soon)
-??? screenshots/            # Optional dashboard or chatbot UI screenshots
-??? SmartAlex_Demo_Tests/   # Live SmartAlex interaction examples with screenshots
-??? README.md               # This file
+**SmartAlex** is your built-in AI assistant trained on industrial systems. He can:
+
+- Generate Node-RED flows from natural language
+- Decode LoRaWAN, Modbus, or HTTP payloads
+- Assist with InfluxDB and Grafana configuration
+- Answer technical questions in real-time
+
+Accessible via:
+
+- `/chatbot/` API
+- Built-in HTML client on the server
+- Embedded in your IIoT frontend (via reverse proxy)
+
+---
+
+## 🛠️ Technology Stack
+
+- Node.js + Express (SmartAlex)
+- Node-RED
+- InfluxDB 1.8 / 2.x
+- Grafana 10+
+- Ubuntu 22.04 (AWS EC2)
+- OpenAI GPT API integration
+
+---
+
+## 📁 Repository Structure
+SmartAlex/ # Chatbot backend (Node.js + Express)
+├── server.js
+├── system.txt
+
+NodeRED_Flows/ # Sample flows: energy monitor, LoRaWAN, cellular
+AWS_IoT_Examples/ # AWS IoT Core integration (coming soon)
+SmartAlex_Demo_Tests/ # Live chatbot test cases (USGS, BME280, etc.)
+screenshots/ # Screenshots of Node-RED, Grafana, SmartAlex
+README.md # This file
+
+
+---
+
+## 🔬 Demos
+
+| Demo       | Description                                |
+|------------|--------------------------------------------|
+| [Demo 01](./SmartAlex_Demo_Tests/demo01_BME280_to_influx) | ESP32 BME280 → Influx → Grafana |
+| [Demo 02](./SmartAlex_Demo_Tests/demo02_USGS_water_data_import) | USGS water level + flow integration |
+| More coming soon...                                     |
+
+---
+
+📌 _Maintained by Integra Developments LLC_
