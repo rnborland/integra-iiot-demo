@@ -1,0 +1,94 @@
+To create a Node-RED flow to handle data from an ESP32 with a BME280 sensor, you'll need to receive the data through MQTT from AWS IoT Core. Here's how you can set up a flow to process and send this data to InfluxDB for further use with Grafana (visualization).
+
+### Prerequisites
+- Ensure your ESP32 is publishing data to AWS IoT Core.
+- Import your AWS IoT Core certificates into your Node-RED instance to establish an MQTT connection.
+- Make sure you have the `node-red-contrib-influxdb` and `node-red-contrib-mqtt-broker` installed in your Node-RED instance.
+
+### Flow Outline
+We'll create a flow that:
+1. Connects to your MQTT broker.
+2. Processes the incoming BME280 data.
+3. Writes it to InfluxDB.
+
+### Node Types Required
+- mqtt in
+- function
+- influxdb out
+- debug
+
+### Instructions
+1. **MQTT In Node:** Connect to AWS IoT Core and subscribe to the relevant MQTT topic.
+2. **Function Node:** Format the received data into a suitable payload for InfluxDB.
+3. **InfluxDB Out Node:** Send the processed data to InfluxDB.
+4. **Debug Node:** Monitor the flow to ensure data is being processed correctly.
+
+### Sample JSON Flow
+```json
+[
+  {
+    "id": "mqtt_in_1",
+    "type": "mqtt in",
+    "z": "flow1",
+    "name": "AWS IoT Core",
+    "topic": "your/iot/topic",
+    "qos": "0",
+    "datatype": "json",
+    "broker": "brokerId",
+    "x": 120,
+    "y": 180,
+    "wires": [["function_1"]]
+  },
+  {
+    "id": "function_1",
+    "type": "function",
+    "z": "flow1",
+    "name": "Format Payload for InfluxDB",
+    "func": "msg.payload = [\n {\n measurement: \"environment_data\",\n fields: {\n temperature: msg.payload.temperature,\n humidity: msg.payload.humidity,\n pressure: msg.payload.pressure\n },\n tags: {\n sensor_id: \"esp32_bme280\"\n }\n }\n];\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 340,
+    "y": 180,
+    "wires": [["influxdb_out_1"]]
+  },
+  {
+    "id": "influxdb_out_1",
+    "type": "influxdb out",
+    "z": "flow1",
+    "influxdb": "influxDbConfig",
+    "name": "Write to InfluxDB",
+    "measurement": "environment_data",
+    "x": 580,
+    "y": 180,
+    "wires": []
+  },
+  {
+    "id": "debug_1",
+    "type": "debug",
+    "z": "flow1",
+    "name": "Debug Output",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "x": 580,
+    "y": 240,
+    "wires": []
+  }
+]
+Steps to Import the Flow
+Copy the entire block starting with [ and ending with ].
+
+Go to Node-RED and use Import → Clipboard.
+
+Paste the content into the import dialog and click 'Import'.
+
+After Importing
+Replace your/iot/topic with your ESP32 MQTT topic.
+
+Configure your MQTT broker under the mqtt in node (AWS certs).
+
+Configure your InfluxDB under influxdb out.
+
+This setup reads sensor data from your ESP32, processes it in Node-RED, and stores it in InfluxDB for Grafana visualization.

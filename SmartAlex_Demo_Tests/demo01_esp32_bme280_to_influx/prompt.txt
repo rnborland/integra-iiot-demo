@@ -1,0 +1,1 @@
+i have an esp32 on wifi with a bme280 sensor sending data to aws iot core, please construct a flow for baro pressure, temperature and humidity
