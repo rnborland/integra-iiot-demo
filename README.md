@@ -1,6 +1,8 @@
 # ⚙️ Integra IIoT Platform – AWS EC2 Deployment
 
-> [🛒 View on AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g)
+> 🛒 **To launch the Integra IIoT Platform**, copy and paste this URL into your browser:
+
+https://aws.amazon.com/marketplace/pp/prodview-5n6b3nx6tnu4g
 
 This repository supports the official **Integra Developments Industrial IoT (IIoT) server image** available on the AWS Marketplace. It includes full-stack components for real-time sensor integration, data visualization, and AI-assisted support via SmartAlex.
 
