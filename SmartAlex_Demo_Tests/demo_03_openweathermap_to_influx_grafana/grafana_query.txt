@@ -1,0 +1,4 @@
+SELECT mean("temperature") AS "Temp", mean("humidity") AS "Humidity"
+FROM "weather"
+WHERE $timeFilter
+GROUP BY time($__interval) fill(null)

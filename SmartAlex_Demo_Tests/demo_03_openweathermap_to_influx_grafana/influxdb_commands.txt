@@ -1,0 +1,35 @@
+CREATE DATABASE weather
+> SHOW DATABASES
+name: databases
+name
+----
+_internal
+meters_electric
+sensors
+usgs
+weather
+> USE weather;
+Using database weather
+> SHOW MEASUREMENTS;
+name: measurements
+name
+----
+weather
+> SHOW FIELD KEYS FROM openweathermap_data;
+> SHOW FIELD KEYS FROM weather;
+name: weather
+fieldKey    fieldType
+--------    ---------
+humidity    float
+temperature float
+> SELECT * FROM weather ORDER BY time DESC LIMIT 5;
+name: weather
+time                humidity location  temperature
+----                -------- --------  -----------
+1747995316531541159 89       your_city 7.21
+> SELECT temperature, humidity FROM weather ORDER BY time DESC LIMIT 5;
+name: weather
+time                temperature humidity
+----                ----------- --------
+1747995316531541159 7.21        89
+>

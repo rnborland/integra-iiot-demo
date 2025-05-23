@@ -1,0 +1,11 @@
+5/23/2025, 6:39:55 AMnode: InfluxDB Response
+msg : Object
+object
+_msgid: "5bf5c99bc04320a8"
+statusCode: 204
+headers: object
+responseUrl: "http://localhost:8086/write?db=weather&u=robinborland&p=robin16749%23"
+payload: ""
+redirectList: array[0]
+retry: 0
+method: "POST"
