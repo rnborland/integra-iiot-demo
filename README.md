@@ -51,18 +51,20 @@ This repo supports the preconfigured **AWS EC2 image** published by Integra Deve
 
 **SmartAlex** is your built-in AI assistant trained on industrial systems. He can:
 
-- Generate Node-RED flows from natural language
-- Decode LoRaWAN, Modbus, or HTTP payloads
-- Assist with InfluxDB and Grafana configuration
-- Answer technical questions in real-time
-
-Accessible via:
-
-- `/chatbot/` API
-- Built-in HTML client on the server
-- Embedded in your IIoT frontend (via reverse proxy)
+- ✅ Generate Node-RED flows from natural language
+- ✅ Decode LoRaWAN, Modbus, or HTTP payloads
+- ✅ Assist with InfluxDB and Grafana configuration
+- ✅ Answer technical questions in real time
 
 ---
+
+🔗 **Access SmartAlex Here:**  
+👉 [https://integra-developments.com/smartalex](https://integra-developments.com/smartalex)  
+_Built-in chatbot with registration and IIoT flow support, powered by a secure backend server._
+
+💡 **Note:** SmartAlex runs on a separate secured server (not your IIoT instance) to protect API keys and ensure scalable performance.
+
+
 
 ## 🛠️ Technology Stack
 
